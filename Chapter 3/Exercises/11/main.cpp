@@ -74,7 +74,7 @@ int main()
 
     int total{pennies + (nickles * 5) + (dimes * 10) + (quarters * 25) + (halfDollars * 50)};
     int dollars{total / 100};
-    int cents {total - (dollars * 100)};
+    int cents {total % 100};
 
     cout << "You have a total value, in cents, is " << total << " cents.\n"
          << "In dollars, the value comes out to $" << dollars << '.' << cents << ".\n";
