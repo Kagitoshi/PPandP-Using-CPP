@@ -31,7 +31,7 @@ int main()
             cout << "You have entered " << stoi(userNum1) << ", which is the smaller of the two, & "
                  << stoi(userNum2) << ", which is larger.\n";
         }
-        else if(stoi(userNum1) < stoi(userNum2))
+        else if(stoi(userNum1) > stoi(userNum2))
         {
             cout << "You have entered " << stoi(userNum2) << ", which is the smaller of the two & "
                  << stoi(userNum1) << ", which is larger.\n";
