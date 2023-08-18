@@ -105,6 +105,8 @@ int main()
 
                 cout << "The values you entered were, all in meters: \n";
 
+                //sorting the vector then printing it
+                sort(enteredLength.begin(), enteredLength.end());
                 for(double i: enteredLength)
                 {
                     cout << i << ", ";
