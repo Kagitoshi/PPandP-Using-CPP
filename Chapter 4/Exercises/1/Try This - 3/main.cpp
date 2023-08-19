@@ -5,9 +5,12 @@ int main()
 
     cout << "Time to print out the alphabet with their corresponding integers... YAAAYYY!\n";
 
-    for (char alpha{'A'}; alpha <= 'z'; ++alpha)
+    char alpha{'A'};
+
+    while(alpha <= 'z')
     {
         cout << alpha << '\t' << static_cast<int>(alpha) << '\n';
+        ++alpha;
     }
 
     return 0;
