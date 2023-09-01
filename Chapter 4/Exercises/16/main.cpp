@@ -1,156 +1,46 @@
-#include <cfloat>
-#include <numeric>
 #include "std_lib_facilities.h"
 
 int main()
 {
-    constexpr double inchPerFeet{12};
-    constexpr double cmPerMeter{100.0};
-    constexpr double feetPerMeter(3.2808);
+    cout << "Please allow me to find X number of prime numbers\n"
+         << "starting from 1 Please enter the\n"
+         << "number of prime numbers I should find: ";
 
-    double length{0};
+    int numOfPrimesToFind{};
+    cin >> numOfPrimesToFind;
 
-    string unit{};
+    vector<int> primes{};
 
-    double max{DBL_MIN};
-    double min{DBL_MAX};
+    int primeNumCount{0};
+    int primeCheck{2};
 
-    vector<double> enteredLength{};
-
-    while (true)
+    while(primeNumCount < numOfPrimesToFind)
     {
-        cout << "This is a tracker for lengths in meters.\n"
-             << "While you can enter a different unit of measurement\n"
-             << "it will be converted to meters. The units are case sensitive.\n\n";
-        cout << "Please enter a length followed but a unit (c, in, ft, m):\n";
 
-        // loops until proper unit is typed in
-        while (true)
+        for(int j{1}; j <= primeCheck; ++j)
         {
-            cin >> length >> unit;
-
-            if (unit != "in" && unit != "cm" && unit != "m" && unit != "ft")
+            if(primeCheck % j == 0 && primeCheck == j && j != 1)
             {
-                cout << "Sorry, I don't know a unit called '" << unit <<"'\n";
+                primes.push_back(primeCheck);
+
+                ++primeNumCount;
             }
-            else
+            else if(primeCheck % j == 0 && j != primeCheck && j != 1)
             {
                 break;
             }
         }
-
-        //converting the unit to meters
-        if (unit == "in")
-        {
-            length = (length / inchPerFeet) / feetPerMeter;
-        }
-        else if (unit == "cm")
-        {
-            length = (length / cmPerMeter);
-        }
-        else if (unit == "ft")
-        {
-            length = (length / feetPerMeter);
-        }
-        else
-        {
-        }
-
-
-        // tracking the largest & smallest number entered so far
-        if (length < min)
-        {
-            if(length < 1.0/100 )
-            {
-                cout << "Wow, that length is pretty close to the shortest length I have seen so far..\n";
-            }
-            cout << "You have entered " << length << " meters, which is the shortest length so far.\n";
-            min = length;
-        }
-        else if(length > max)
-        {
-            if((length - max) < 1.0/100 )
-            {
-                cout << "Wow, that length is pretty close to the longest length I have seen so far.\n";
-            }
-            cout << "You have entered " << length << " meters, which is the longest length so far.\n";
-
-            max = length;
-        }
-
-        //pushing the numbers to the vector
-        enteredLength.push_back(length);
-
-        //loops until accepted answer is inputted.
-        while (true)
-        {
-            cout << "Would you like to input another length(y/n)?:";
-            char answer{};
-            cin >> answer;
-
-            if (answer == 'y' || answer == 'Y')
-            {
-                cout << "\n\n\n";
-                break;
-            }
-            else if (answer == 'n'|| answer == 'N')
-            {
-
-                //sorting the array
-                sort(enteredLength.begin(), enteredLength.end());
-
-                //finding the mode
-                int currentModeCount{1};
-                int highestModeCount{1};
-                double modeNum{};
-
-                for(int i{1}; i < enteredLength.size(); ++i)
-                {
-                    if(enteredLength[i] == enteredLength[i - 1])
-                    {
-                        ++currentModeCount;
-                    }
-                    else
-                    {
-                        if(currentModeCount > highestModeCount)
-                        {
-                            highestModeCount = currentModeCount;
-                            modeNum = enteredLength[i - 1];
-                        }
-
-                        currentModeCount = 1;
-                    }
-                }
-
-
-
-
-                cout << "The shortest length you entered was " << min << " meters.\n"
-                     << "The longest length you entered was " << max << " meters.\n"
-                     << "You have entered " << enteredLength.size() << " values.\n"
-                     << "The sum of the values you entered was "
-                     << accumulate(enteredLength.begin(), enteredLength.end(), 0.0)
-                     << " meters. The mode was " << modeNum << " and it was entered " << highestModeCount
-                     << " times.\n\n";
-
-
-                cout << "The values you entered were, all in meters: \n";
-
-                //printing the vector
-
-                for(double i: enteredLength)
-                {
-                    cout << i << ", ";
-                }
-
-                cout << "\n\n\nThanks for using this program.\n\nPEACE!\n";
-                return 0;
-            }
-            else
-            {
-                cout << "Please answer with only 'y' or 'n'.\n\n\n";
-            }
-
-        }
+        primeCheck++;
     }
+
+    cout << "We found the first " << primeNumCount << " prime numbers starting from 1.\n";
+
+    for (int i: primes)
+    {
+        cout << i << ' ';
+    }
+
+    cout << '\n';
+
+    return 0;
 }
